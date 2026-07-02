@@ -1,8 +1,15 @@
-Poné acá las imágenes del sitio:
+IMÁGENES DEL SITIO — poné acá tus fotos:
 
-- hero.jpg        -> foto grande del hero (recomendado ~1920x1280, horizontal)
-- (galería)       -> si querés fotos reales en la galería, agregalas acá
-                     (ej. g1.jpg, g2.jpg, g3.jpg, g4.jpg) y avisá para
-                     enlazarlas en el index.html
+CARRUSEL DEL HERO (se pasan solas con cross-fade + zoom lento):
+  - hero1.jpg
+  - hero2.jpg
+  - hero3.jpg
+  - hero4.jpg        (opcionales: usá las que tengas; con 1 sola queda fija)
+  Recomendado: horizontales, ~1920x1280, buena luz.
+  * Solo se muestran las que existan; si no hay ninguna, el hero usa un degradado.
 
-Mientras no exista hero.jpg, el hero muestra un degradado de respaldo.
+LOGO:
+  - logo.png         (ya está, fondo transparente)
+
+GALERÍA (opcional, fotos reales):
+  - agregá g1.jpg, g2.jpg... y avisá para enlazarlas en index.html
