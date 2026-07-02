@@ -151,7 +151,10 @@ function closeTeam() {
   var m = document.getElementById('teamModal'); if (m) m.hidden = true;
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeTeam(); });
+// Selector de estudio (booking)
+function openBook() { var m = document.getElementById('bookModal'); if (m) { m.hidden = false; document.body.style.overflow = 'hidden'; } }
+function closeBook() { var m = document.getElementById('bookModal'); if (m) m.hidden = true; document.body.style.overflow = ''; }
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeTeam(); closeBook(); } });
 
 // Mostrar la inicial en las tarjetas del equipo mientras no exista la foto
 document.querySelectorAll('.tavatar').forEach(function (av) {
