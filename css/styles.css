@@ -100,6 +100,23 @@ section.block > .wrap{position:relative;z-index:1;}
 .cta::after{content:'';position:absolute;width:260px;height:260px;bottom:-110px;right:8%;border:1px solid rgba(255,255,255,.14);border-radius:50%;pointer-events:none;z-index:0;}
 .cta .center{position:relative;z-index:1;}
 
+/* movimiento + latido lento de los orbes y aros */
+@keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(22px,-18px) scale(1.16);}}
+@keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-20px,16px) scale(1.13);}}
+@keyframes orbCta{0%,100%{transform:translateX(-50%) scale(1);}50%{transform:translateX(-50%) scale(1.18);}}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.9;}50%{transform:scale(1.09);opacity:.5;}}
+#estudio::before{animation:orbFloat1 9s ease-in-out infinite;}
+#clases::after{animation:orbFloat1 12s ease-in-out infinite;}
+.quote::before{animation:orbFloat2 11s ease-in-out infinite;}
+#equipo::before{animation:orbFloat2 10.5s ease-in-out infinite;}
+.cta::before{animation:orbCta 10s ease-in-out infinite;}
+#estudio::after{animation:ringPulse 7s ease-in-out infinite;}
+.quote::after{animation:ringPulse 8.5s ease-in-out infinite;}
+.cta::after{animation:ringPulse 9.5s ease-in-out infinite;}
+@media (prefers-reduced-motion: reduce){
+  #estudio::before,#clases::after,.quote::before,#equipo::before,.cta::before,#estudio::after,.quote::after,.cta::after{animation:none;}
+}
+
 /* Philosophy quote */
 .quote{background:var(--bg2);}
 .quote blockquote{font-family:var(--serif);font-size:clamp(24px,3.6vw,40px);font-style:italic;font-weight:400;line-height:1.35;max-width:860px;margin:22px auto 0;color:var(--ink);}
