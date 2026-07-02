@@ -242,6 +242,50 @@ footer{background:var(--bg2);padding:60px 0 34px;}
 .cform input:user-invalid,.cform textarea:user-invalid{border-color:#c0392b;box-shadow:0 0 0 3px rgba(192,57,43,.12);}
 @media(max-width:640px){ .cform-row{grid-template-columns:1fr;} }
 
+/* ===== Booking modal — luxury look (scoped a #bookModal) ===== */
+#bookModal .tmodal-backdrop{background:rgba(10,7,8,.74);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);}
+#bookModal .tmodal-card{
+  background:
+    radial-gradient(130% 85% at 50% -12%, rgba(224,190,126,.12), transparent 58%),
+    linear-gradient(165deg,#201b1c 0%,#171213 56%,#100c0c 100%);
+  border:1px solid rgba(224,190,126,.24);
+  box-shadow:0 50px 120px rgba(0,0,0,.62), 0 14px 44px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.06);
+  color:#f2ebe0;padding:46px 40px 38px;overflow:hidden;
+}
+#bookModal .tmodal-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:132px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#e8ca8c 50%,transparent);}
+#bookModal .eyebrow{color:#e0be7e;letter-spacing:5px;}
+#bookModal .tmodal-card h3{color:#f7f1e7;font-weight:500;letter-spacing:.3px;}
+#bookModal .book-sub,#bookModal .cform-req{color:#b4a894;}
+#bookModal .tmodal-close{color:#8f8577;}
+#bookModal .tmodal-close:hover{color:#e8ca8c;}
+#bookModal .book-back{color:#9c9082;}
+#bookModal .book-back:hover{color:#e8ca8c;}
+/* Opciones de clase = placas de vidrio con filo dorado y barrido de brillo */
+#bookModal .studio-opt{
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.016));
+  border:1px solid rgba(224,190,126,.2);border-radius:16px;padding:22px 24px;position:relative;overflow:hidden;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .3s,background .3s;
+}
+#bookModal .studio-opt::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 40%,rgba(232,202,140,.12) 50%,transparent 60%);transform:translateX(-120%);transition:transform .75s ease;}
+#bookModal .studio-opt:hover{border-color:rgba(232,202,140,.6);background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.03));box-shadow:0 20px 46px rgba(0,0,0,.5),0 0 0 1px rgba(232,202,140,.16);transform:translateY(-3px);}
+#bookModal .studio-opt:hover::after{transform:translateX(120%);}
+#bookModal .so-num{color:#e8ca8c;font-family:var(--serif);font-size:16px;letter-spacing:2px;opacity:.82;}
+#bookModal .so-name{color:#f7f1e7;font-size:23px;}
+#bookModal .so-addr{color:#a99d8c;}
+#bookModal .so-go{color:#e8ca8c;letter-spacing:2px;}
+/* Inputs oscuros elegantes */
+#bookModal .cform input{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.14);color:#f2ebe0;border-radius:12px;padding:15px 16px;}
+#bookModal .cform input::placeholder{color:#9b8f7f;}
+#bookModal .cform input:focus{border-color:#e0be7e;box-shadow:0 0 0 3px rgba(224,190,126,.18);background:rgba(255,255,255,.06);}
+#bookModal .cform input:user-invalid{border-color:#c76b6b;box-shadow:0 0 0 3px rgba(199,107,107,.14);}
+#bookModal .req{color:#e8ca8c;}
+/* Botón dorado */
+#bookModal .cform .btn.solid{align-self:stretch;width:100%;text-align:center;margin-top:12px;border:none;color:#241c12;background:linear-gradient(135deg,#efd7a0 0%,#d3ad6a 100%);box-shadow:0 12px 30px rgba(211,173,106,.3);transition:filter .3s,box-shadow .3s,transform .2s;}
+#bookModal .cform .btn.solid:hover{filter:brightness(1.06);box-shadow:0 16px 38px rgba(211,173,106,.42);}
+#bookModal .cform .btn.solid[disabled]{background:rgba(255,255,255,.08);color:#8b8072;box-shadow:none;filter:none;cursor:default;}
+#bookModal .cform-msg.ok{color:#e8ca8c;}
+@media(max-width:640px){ #bookModal .tmodal-card{padding:38px 24px 30px;} }
+
 /* Responsive */
 @media(max-width:900px){
   .book-iframe{height:760px;} .book-hero{min-height:38vh;padding:110px 20px 44px;}
