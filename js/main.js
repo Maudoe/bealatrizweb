@@ -93,36 +93,34 @@ setLang(LANG);
   els.forEach(function (el) { io.observe(el); });
 })();
 
-// ---- Carrusel de la galería ----
+// ---- Galería: 4 placas que rotan fotos al azar (cross-fade) ----
 (function () {
-  var host = document.getElementById('gcSlides');
-  var dotsHost = document.getElementById('gcDots');
-  if (!host) return;
-  var N = 14; // cantidad de fotos en assets/gallery (g1..gN)
-  var slides = [], dots = [], idx = 0, timer;
-  function show(i) {
-    if (!slides.length) return;
-    slides[idx].classList.remove('on'); if (dots[idx]) dots[idx].classList.remove('on');
-    idx = (i + slides.length) % slides.length;
-    slides[idx].classList.add('on'); if (dots[idx]) dots[idx].classList.add('on');
+  var wrap = document.getElementById('galGrid');
+  if (!wrap) return;
+  var N = 14, TILES = 4;               // fotos totales (g1..gN) y cantidad de placas
+  var pool = [];
+  for (var i = 1; i <= N; i++) pool.push('assets/gallery/g' + i + '.jpg');
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  for (var t = 0; t < TILES; t++) {
+    var tile = document.createElement('div'); tile.className = 'gtile';
+    var la = document.createElement('div'), lb = document.createElement('div');
+    la.className = 'gl on'; lb.className = 'gl';
+    tile.appendChild(la); tile.appendChild(lb); wrap.appendChild(tile);
+    var order = shuffle(pool);
+    la.style.backgroundImage = "url('" + order[0] + "')";
+    (function (front, back, order) {
+      var f = front, b = back, p = 0;
+      function tick() {
+        p = (p + 1) % order.length;
+        b.style.backgroundImage = "url('" + order[p] + "')";
+        b.classList.add('on'); f.classList.remove('on');
+        var tmp = f; f = b; b = tmp;                 // swap capas
+        setTimeout(tick, 3200 + Math.random() * 3400); // 3.2–6.6 s, distinto cada vez
+      }
+      setTimeout(tick, 1500 + Math.random() * 3500);   // arranque escalonado
+    })(la, lb, order);
   }
-  function start() { clearInterval(timer); if (slides.length > 1) timer = setInterval(function () { show(idx + 1); }, 4500); }
-  for (var k = 1; k <= N; k++) {
-    var d = document.createElement('div');
-    d.className = 'gc-slide';
-    d.style.backgroundImage = "url('assets/gallery/g" + k + ".jpg')";
-    host.appendChild(d); slides.push(d);
-    (function (mine) {
-      var dot = document.createElement('i');
-      dot.addEventListener('click', function () { show(mine); start(); });
-      dotsHost.appendChild(dot); dots.push(dot);
-    })(k - 1);
-  }
-  if (slides.length) { slides[0].classList.add('on'); dots[0].classList.add('on'); }
-  var prev = document.getElementById('gcPrev'), next = document.getElementById('gcNext');
-  if (prev) prev.addEventListener('click', function () { show(idx - 1); start(); });
-  if (next) next.addEventListener('click', function () { show(idx + 1); start(); });
-  start();
 })();
 
 // ---- Equipo (modales) ----

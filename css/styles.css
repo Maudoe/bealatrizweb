@@ -119,6 +119,12 @@ section.block{padding:100px 0;}
 .gc-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer;transition:.25s;}
 .gc-dots i.on{background:#fff;width:18px;border-radius:4px;}
 
+/* Placas de galería que rotan fotos al azar (cross-fade) */
+.gtile{position:relative;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:#0c0c0d;box-shadow:0 16px 38px rgba(44,42,40,.16);transition:box-shadow .35s, border-color .3s;border:1px solid var(--line);}
+.gtile:hover{box-shadow:0 22px 48px rgba(44,42,40,.28);}
+.gl{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease;}
+.gl.on{opacity:1;}
+
 /* Team */
 .team{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:56px;}
 .tcard{background:transparent;border:none;cursor:pointer;font-family:inherit;color:inherit;display:flex;flex-direction:column;align-items:center;gap:11px;padding:12px;transition:transform .3s;}
