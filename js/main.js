@@ -33,6 +33,10 @@ function setLang(l) {
     var v = el.getAttribute('data-' + LANG);
     if (v != null) el.textContent = v;
   });
+  document.querySelectorAll('[data-ph-en]').forEach(function (el) {
+    var v = el.getAttribute('data-ph-' + LANG);
+    if (v != null) el.placeholder = v;
+  });
   var t = document.getElementById('langToggle');
   if (t) t.textContent = (LANG === 'en') ? 'ไทย' : 'EN';
   try { localStorage.setItem('bz_lang', LANG); } catch (e) {}
@@ -157,3 +161,34 @@ document.querySelectorAll('.tavatar').forEach(function (av) {
   im.onerror = function () { av.classList.add('noimg'); av.style.backgroundImage = 'none'; };
   im.src = m[1];
 });
+
+// ---- Formulario de contacto (envío por AJAX a FormSubmit) ----
+(function () {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var btn = document.getElementById('cformBtn');
+  var msg = document.getElementById('cformMsg');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (form._honey && form._honey.value) return; // honeypot anti-spam
+    var lang = (typeof LANG !== 'undefined') ? LANG : 'en';
+    var sending = (lang === 'th') ? 'กำลังส่ง…' : 'Sending…';
+    var okTxt = (lang === 'th') ? 'ขอบคุณ! เราจะติดต่อกลับเร็ว ๆ นี้ ✓' : 'Thanks! We\'ll get back to you soon ✓';
+    var errTxt = (lang === 'th') ? 'เกิดข้อผิดพลาด ลองใหม่ หรือติดต่อทาง LINE' : 'Something went wrong. Please try again or reach us on LINE.';
+    var orig = btn.textContent;
+    btn.disabled = true; btn.textContent = sending; msg.hidden = true;
+    fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d && (d.success === 'true' || d.success === true)) {
+          form.reset();
+          msg.textContent = okTxt; msg.className = 'cform-msg ok'; msg.hidden = false;
+        } else { throw new Error('fail'); }
+        btn.textContent = orig; btn.disabled = false;
+      })
+      .catch(function () {
+        msg.textContent = errTxt; msg.className = 'cform-msg err'; msg.hidden = false;
+        btn.textContent = orig; btn.disabled = false;
+      });
+  });
+})();

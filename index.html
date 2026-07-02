@@ -114,12 +114,32 @@
 </section>
 
 <!-- CTA -->
-<section class="block cta" id="contacto">
+<section class="block cta" id="empezar">
   <div class="wrap center">
     <span class="eyebrow" style="color:var(--accent)" data-en="Start today" data-th="เริ่มวันนี้">Start today</span>
     <h2 data-en="Your first class awaits" data-th="คลาสแรกของคุณรออยู่">Your first class awaits</h2>
     <p data-en="Book online in seconds and join the Bealatriz community." data-th="จองออนไลน์ได้ในไม่กี่วินาที และเข้าร่วมชุมชน Bealatriz">Book online in seconds and join the Bealatriz community.</p>
     <a class="btn" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1xzNH9PRJbx5lRX5v4qoG23LQRapZuTyS-wp5ClAdUQp8Bc3oD3cOj_EH6-AK1c8GijvdY0kQd" target="_blank" rel="noopener" data-en="Book now" data-th="จองเลย">Book now</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="block contact" id="contacto" style="background:var(--white)">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow" data-en="Get in touch" data-th="ติดต่อเรา">Get in touch</span><h2 data-en="Contact us" data-th="ติดต่อเรา">Contact us</h2><p class="lead" data-en="Questions about classes, schedules or packages? Send us a message and we'll get back to you." data-th="มีคำถามเกี่ยวกับคลาส ตารางเวลา หรือแพ็กเกจ? ส่งข้อความถึงเรา แล้วเราจะติดต่อกลับ">Questions about classes, schedules or packages? Send us a message and we'll get back to you.</p></div>
+    <form class="cform" id="contactForm" action="https://formsubmit.co/ajax/contact@bealatriz.com" method="POST">
+      <div class="cform-row">
+        <input type="text" name="name" required placeholder="Name" data-ph-en="Name" data-ph-th="ชื่อ">
+        <input type="email" name="email" required placeholder="Email" data-ph-en="Email" data-ph-th="อีเมล">
+      </div>
+      <input type="text" name="phone" placeholder="Phone / WhatsApp (optional)" data-ph-en="Phone / WhatsApp (optional)" data-ph-th="โทรศัพท์ / WhatsApp (ไม่บังคับ)">
+      <textarea name="message" rows="5" required placeholder="Your message" data-ph-en="Your message" data-ph-th="ข้อความของคุณ"></textarea>
+      <input type="hidden" name="_subject" value="New contact — Bealatriz website">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none">
+      <button class="btn solid" type="submit" id="cformBtn" data-en="Send message" data-th="ส่งข้อความ">Send message</button>
+      <p class="cform-msg" id="cformMsg" hidden></p>
+    </form>
   </div>
 </section>
 
