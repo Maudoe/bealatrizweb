@@ -1,0 +1,8 @@
+Poné acá las imágenes del sitio:
+
+- hero.jpg        -> foto grande del hero (recomendado ~1920x1280, horizontal)
+- (galería)       -> si querés fotos reales en la galería, agregalas acá
+                     (ej. g1.jpg, g2.jpg, g3.jpg, g4.jpg) y avisá para
+                     enlazarlas en el index.html
+
+Mientras no exista hero.jpg, el hero muestra un degradado de respaldo.
