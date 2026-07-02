@@ -20,6 +20,7 @@
       <nav class="menu" id="menu">
         <a href="#estudio" data-en="Studio" data-th="สตูดิโอ">Studio</a>
         <a href="#clases" data-en="Classes" data-th="คลาสเรียน">Classes</a>
+        <a href="#equipo" data-en="Team" data-th="ทีมงาน">Team</a>
         <a href="#galeria" data-en="Gallery" data-th="แกลเลอรี">Gallery</a>
         <a href="#contacto" data-en="Contact" data-th="ติดต่อ">Contact</a>
         <a class="btn" href="https://da.gd/bealatriz" target="_blank" rel="noopener" data-en="Book" data-th="จอง">Book</a>
@@ -83,15 +84,36 @@
   </div>
 </section>
 
+<!-- TEAM -->
+<section class="block" id="equipo" style="background:var(--white)">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow" data-en="Our team" data-th="ทีมงานของเรา">Our team</span><h2 data-en="Meet your instructors" data-th="พบกับครูผู้สอนของคุณ">Meet your instructors</h2></div>
+    <div class="team">
+      <button class="tcard" onclick="openTeam('bee')">
+        <span class="tavatar" data-initial="B" style="background-image:url('assets/team/bee.jpg')"></span>
+        <h3>Bee</h3><span class="trole" data-en="Instructor" data-th="ครูผู้สอน">Instructor</span>
+      </button>
+      <button class="tcard" onclick="openTeam('aida')">
+        <span class="tavatar" data-initial="A" style="background-image:url('assets/team/aida.jpg')"></span>
+        <h3>Aida</h3><span class="trole" data-en="Instructor" data-th="ครูผู้สอน">Instructor</span>
+      </button>
+      <button class="tcard" onclick="openTeam('ai')">
+        <span class="tavatar" data-initial="A" style="background-image:url('assets/team/ai.jpg')"></span>
+        <h3>Ai</h3><span class="trole" data-en="Instructor" data-th="ครูผู้สอน">Instructor</span>
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- GALLERY -->
-<section class="block" id="galeria" style="background:var(--white)">
+<section class="block" id="galeria">
   <div class="wrap">
     <div class="center"><span class="eyebrow" data-en="The space" data-th="พื้นที่ของเรา">The space</span><h2 data-en="Gallery" data-th="แกลเลอรี">Gallery</h2></div>
-    <div class="gallery" style="margin-top:48px">
-      <div class="gitem"><span data-en="Photo 1" data-th="รูปที่ 1">Photo 1</span></div>
-      <div class="gitem"><span data-en="Photo 2" data-th="รูปที่ 2">Photo 2</span></div>
-      <div class="gitem"><span data-en="Photo 3" data-th="รูปที่ 3">Photo 3</span></div>
-      <div class="gitem"><span data-en="Photo 4" data-th="รูปที่ 4">Photo 4</span></div>
+    <div class="gallery-carousel" style="margin-top:48px">
+      <div class="gc-slides" id="gcSlides"></div>
+      <button class="gc-arrow l" id="gcPrev" aria-label="Anterior">‹</button>
+      <button class="gc-arrow r" id="gcNext" aria-label="Siguiente">›</button>
+      <div class="gc-dots" id="gcDots"></div>
     </div>
   </div>
 </section>
@@ -133,6 +155,18 @@
     <div class="foot-bottom" data-en="© Bealatriz Healthy Space · Pilates Home Studio, Khon Kaen 2026" data-th="© Bealatriz Healthy Space · สตูดิโอพิลาทิส ขอนแก่น 2026">© Bealatriz Healthy Space · Pilates Home Studio, Khon Kaen 2026</div>
   </div>
 </footer>
+
+<!-- TEAM MODAL -->
+<div class="tmodal" id="teamModal" hidden>
+  <div class="tmodal-backdrop" onclick="closeTeam()"></div>
+  <div class="tmodal-card" role="dialog" aria-modal="true">
+    <button class="tmodal-close" onclick="closeTeam()" aria-label="Cerrar">✕</button>
+    <span class="tmodal-avatar" id="tmAvatar"></span>
+    <h3 id="tmName"></h3>
+    <span class="trole" id="tmRole"></span>
+    <p id="tmBio"></p>
+  </div>
+</div>
 
 <script src="js/main.js"></script>
 </body>

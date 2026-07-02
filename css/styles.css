@@ -107,6 +107,43 @@ section.block{padding:100px 0;}
 .gitem:hover img{transform:scale(1.06);}
 .gitem span{position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.85);font-size:11px;letter-spacing:2px;text-transform:uppercase;}
 
+/* Gallery carousel (rota las fotos con cross-fade) */
+.gallery-carousel{position:relative;aspect-ratio:3/2;border-radius:10px;overflow:hidden;box-shadow:0 24px 52px rgba(44,42,40,.18);background:#0c0c0d;}
+.gc-slides{position:absolute;inset:0;}
+.gc-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease;}
+.gc-slide.on{opacity:1;}
+.gc-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(20,18,16,.35);color:#fff;font-size:20px;line-height:1;cursor:pointer;backdrop-filter:blur(4px);transition:.25s;}
+.gc-arrow:hover{background:rgba(20,18,16,.72);border-color:#fff;}
+.gc-arrow.l{left:16px;} .gc-arrow.r{right:16px;}
+.gc-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:7px;flex-wrap:wrap;justify-content:center;max-width:82%;}
+.gc-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer;transition:.25s;}
+.gc-dots i.on{background:#fff;width:18px;border-radius:4px;}
+
+/* Team */
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:56px;}
+.tcard{background:transparent;border:none;cursor:pointer;font-family:inherit;color:inherit;display:flex;flex-direction:column;align-items:center;gap:11px;padding:12px;transition:transform .3s;}
+.tcard:hover{transform:translateY(-6px);}
+.tcard:hover .tavatar{box-shadow:0 22px 46px rgba(44,42,40,.26),var(--glow,0 0 0 transparent);border-color:var(--accent);}
+.tavatar{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));background-size:cover;background-position:center;position:relative;border:2px solid transparent;box-shadow:0 16px 36px rgba(44,42,40,.18);transition:.3s;}
+.tavatar::after{content:attr(data-initial);position:absolute;inset:0;display:none;place-items:center;color:#fff;font-family:var(--serif);font-size:56px;font-weight:600;}
+.tavatar.noimg{background:linear-gradient(135deg,var(--accent),var(--accent2));}
+.tavatar.noimg::after{display:grid;}
+.tcard h3{font-size:24px;}
+.trole{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-family:ui-monospace,'JetBrains Mono',monospace;}
+
+/* Team modal */
+.tmodal[hidden]{display:none;}
+.tmodal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px;}
+.tmodal-backdrop{position:absolute;inset:0;background:rgba(20,16,18,.62);backdrop-filter:blur(4px);}
+.tmodal-card{position:relative;z-index:1;background:var(--white);border-radius:20px;max-width:470px;width:100%;padding:40px 34px 34px;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.38);animation:tmIn .32s cubic-bezier(.2,.7,.2,1);}
+@keyframes tmIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.tmodal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:18px;color:var(--muted);cursor:pointer;line-height:1;}
+.tmodal-close:hover{color:var(--ink);}
+.tmodal-avatar{width:128px;height:128px;border-radius:50%;margin:0 auto 18px;display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));background-size:cover;background-position:center;box-shadow:0 16px 34px rgba(44,42,40,.22);}
+.tmodal-card h3{font-size:32px;margin-bottom:4px;}
+.tmodal-card p{color:var(--muted);font-size:15px;line-height:1.75;margin-top:18px;text-align:left;white-space:pre-line;}
+@media(max-width:760px){ .team{grid-template-columns:1fr;gap:26px;} .tavatar{width:150px;height:150px;} .gallery-carousel{aspect-ratio:4/5;} .gc-arrow{width:40px;height:40px;font-size:18px;} }
+
 /* CTA band */
 .cta{background:var(--ink);color:var(--white);text-align:center;}
 .cta h2{color:var(--white);font-size:clamp(30px,4.5vw,50px);}

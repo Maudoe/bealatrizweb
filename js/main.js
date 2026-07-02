@@ -92,3 +92,70 @@ setLang(LANG);
   }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
   els.forEach(function (el) { io.observe(el); });
 })();
+
+// ---- Carrusel de la galería ----
+(function () {
+  var host = document.getElementById('gcSlides');
+  var dotsHost = document.getElementById('gcDots');
+  if (!host) return;
+  var N = 14; // cantidad de fotos en assets/gallery (g1..gN)
+  var slides = [], dots = [], idx = 0, timer;
+  function show(i) {
+    if (!slides.length) return;
+    slides[idx].classList.remove('on'); if (dots[idx]) dots[idx].classList.remove('on');
+    idx = (i + slides.length) % slides.length;
+    slides[idx].classList.add('on'); if (dots[idx]) dots[idx].classList.add('on');
+  }
+  function start() { clearInterval(timer); if (slides.length > 1) timer = setInterval(function () { show(idx + 1); }, 4500); }
+  for (var k = 1; k <= N; k++) {
+    var d = document.createElement('div');
+    d.className = 'gc-slide';
+    d.style.backgroundImage = "url('assets/gallery/g" + k + ".jpg')";
+    host.appendChild(d); slides.push(d);
+    (function (mine) {
+      var dot = document.createElement('i');
+      dot.addEventListener('click', function () { show(mine); start(); });
+      dotsHost.appendChild(dot); dots.push(dot);
+    })(k - 1);
+  }
+  if (slides.length) { slides[0].classList.add('on'); dots[0].classList.add('on'); }
+  var prev = document.getElementById('gcPrev'), next = document.getElementById('gcNext');
+  if (prev) prev.addEventListener('click', function () { show(idx - 1); start(); });
+  if (next) next.addEventListener('click', function () { show(idx + 1); start(); });
+  start();
+})();
+
+// ---- Equipo (modales) ----
+var TEAM = {
+  bee:  { name: 'Bee',  img: 'assets/team/bee.jpg',  role_en: 'Instructor', role_th: 'ครูผู้สอน', bio_en: '[Bio de Bee — completar]',  bio_th: '[ประวัติของ Bee — เพิ่มข้อมูล]' },
+  aida: { name: 'Aida', img: 'assets/team/aida.jpg', role_en: 'Instructor', role_th: 'ครูผู้สอน', bio_en: '[Bio de Aida — completar]', bio_th: '[ประวัติของ Aida — เพิ่มข้อมูล]' },
+  ai:   { name: 'Ai',   img: 'assets/team/ai.jpg',   role_en: 'Instructor', role_th: 'ครูผู้สอน', bio_en: '[Bio de Ai — completar]',   bio_th: '[ประวัติของ Ai — เพิ่มข้อมูล]' }
+};
+function openTeam(id) {
+  var t = TEAM[id]; if (!t) return;
+  var lang = (typeof LANG !== 'undefined') ? LANG : 'en';
+  document.getElementById('tmName').textContent = t.name;
+  document.getElementById('tmRole').textContent = (lang === 'th') ? t.role_th : t.role_en;
+  document.getElementById('tmBio').textContent = (lang === 'th') ? t.bio_th : t.bio_en;
+  var av = document.getElementById('tmAvatar');
+  var im = new Image();
+  av.style.backgroundImage = "url('" + t.img + "')";
+  im.onerror = function () { av.style.backgroundImage = 'linear-gradient(135deg,var(--accent),var(--accent2))'; };
+  im.src = t.img;
+  document.getElementById('teamModal').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function closeTeam() {
+  var m = document.getElementById('teamModal'); if (m) m.hidden = true;
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeTeam(); });
+
+// Mostrar la inicial en las tarjetas del equipo mientras no exista la foto
+document.querySelectorAll('.tavatar').forEach(function (av) {
+  var m = (av.style.backgroundImage || '').match(/url\(["']?([^"')]+)["']?\)/);
+  if (!m) { av.classList.add('noimg'); return; }
+  var im = new Image();
+  im.onerror = function () { av.classList.add('noimg'); av.style.backgroundImage = 'none'; };
+  im.src = m[1];
+});
