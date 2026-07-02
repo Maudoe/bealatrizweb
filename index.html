@@ -128,12 +128,13 @@
   <div class="wrap">
     <div class="center"><span class="eyebrow" data-en="Get in touch" data-th="ติดต่อเรา">Get in touch</span><h2 data-en="Contact us" data-th="ติดต่อเรา">Contact us</h2><p class="lead" data-en="Questions about classes, schedules or packages? Send us a message and we'll get back to you." data-th="มีคำถามเกี่ยวกับคลาส ตารางเวลา หรือแพ็กเกจ? ส่งข้อความถึงเรา แล้วเราจะติดต่อกลับ">Questions about classes, schedules or packages? Send us a message and we'll get back to you.</p></div>
     <form class="cform" id="contactForm" action="https://formsubmit.co/ajax/contact@bealatriz.com" method="POST">
+      <p class="cform-req"><span class="req">*</span> <span data-en="All fields are required" data-th="กรุณากรอกข้อมูลทุกช่อง">All fields are required</span></p>
       <div class="cform-row">
-        <input type="text" name="name" required placeholder="Name" data-ph-en="Name" data-ph-th="ชื่อ">
-        <input type="email" name="email" required placeholder="Email" data-ph-en="Email" data-ph-th="อีเมล">
+        <input type="text" name="name" required placeholder="Name *" data-ph-en="Name *" data-ph-th="ชื่อ *">
+        <input type="email" name="email" required placeholder="Email *" data-ph-en="Email *" data-ph-th="อีเมล *">
       </div>
-      <input type="text" name="phone" required placeholder="Phone / WhatsApp" data-ph-en="Phone / WhatsApp" data-ph-th="โทรศัพท์ / WhatsApp">
-      <textarea name="message" rows="5" required placeholder="Your message" data-ph-en="Your message" data-ph-th="ข้อความของคุณ"></textarea>
+      <input type="text" name="phone" required placeholder="Phone / WhatsApp *" data-ph-en="Phone / WhatsApp *" data-ph-th="โทรศัพท์ / WhatsApp *">
+      <textarea name="message" rows="5" required placeholder="Your message *" data-ph-en="Your message *" data-ph-th="ข้อความของคุณ *"></textarea>
       <input type="hidden" name="_subject" value="New contact — Bealatriz website">
       <input type="hidden" name="_template" value="table">
       <input type="text" name="_honey" style="display:none">
