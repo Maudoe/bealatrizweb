@@ -189,7 +189,9 @@ section.block > .wrap{position:relative;z-index:1;}
 /* Selector de estudio (modal de booking) */
 .book-sub{color:var(--muted);font-size:14px;margin:8px 0 22px;}
 .studio-opts{display:flex;flex-direction:column;gap:14px;text-align:left;}
-.studio-opt{display:block;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--bg);transition:transform .25s,border-color .25s,box-shadow .25s;}
+.studio-opt{display:block;width:100%;text-align:left;font-family:inherit;color:inherit;cursor:pointer;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--bg);transition:transform .25s,border-color .25s,box-shadow .25s;}
+.book-back{background:none;border:none;color:var(--muted);font-family:inherit;font-size:13px;cursor:pointer;padding:0;margin-bottom:8px;}
+.book-back:hover{color:var(--accent);}
 .studio-opt:hover{border-color:var(--accent);box-shadow:0 14px 30px rgba(44,42,40,.14);transform:translateY(-2px);}
 .so-num{font-family:var(--serif);font-size:20px;color:var(--accent);display:block;line-height:1;}
 .so-name{display:block;font-family:var(--serif);font-size:22px;color:var(--ink);margin:4px 0 2px;}

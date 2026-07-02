@@ -151,9 +151,60 @@ function closeTeam() {
   var m = document.getElementById('teamModal'); if (m) m.hidden = true;
   document.body.style.overflow = '';
 }
-// Selector de estudio (booking)
-function openBook() { var m = document.getElementById('bookModal'); if (m) { m.hidden = false; document.body.style.overflow = 'hidden'; } }
-function closeBook() { var m = document.getElementById('bookModal'); if (m) m.hidden = true; document.body.style.overflow = ''; }
+// ===== Booking: tipo -> datos -> calendario =====
+var GCAL = { group: 'https://calendar.app.google/GTQrbAJMwh4SzBZw8', private: 'https://calendar.app.google/Qv36heioVKBe2bA39' };
+var _bookType = null;
+function _bid(id) { return document.getElementById(id); }
+function resetBook() {
+  var s1 = _bid('bookStep1'), s2 = _bid('bookStep2'), f = _bid('bookForm'), msg = _bid('bookMsg'), btn = _bid('bookGo');
+  if (s1) s1.hidden = false; if (s2) s2.hidden = true;
+  if (f) f.reset(); if (msg) { msg.hidden = true; msg.className = 'cform-msg'; }
+  if (btn) btn.disabled = true;
+  _bookType = null;
+}
+function openBook() { resetBook(); var m = _bid('bookModal'); if (m) { m.hidden = false; document.body.style.overflow = 'hidden'; } }
+function closeBook() { var m = _bid('bookModal'); if (m) m.hidden = true; document.body.style.overflow = ''; }
+function pickType(t) {
+  _bookType = t;
+  var lang = (typeof LANG !== 'undefined') ? LANG : 'en';
+  var lbl = _bid('bookTypeLabel');
+  if (lbl) lbl.textContent = (t === 'group') ? (lang === 'th' ? 'คลาสกลุ่ม' : 'Group class') : (lang === 'th' ? 'ส่วนตัว / คู่' : 'Private / Duo');
+  _bid('bookStep1').hidden = true; _bid('bookStep2').hidden = false;
+  validateBook();
+  var n = _bid('bkName'); if (n) setTimeout(function () { n.focus(); }, 60);
+}
+function bookBack() { _bid('bookStep2').hidden = true; _bid('bookStep1').hidden = false; }
+function validateBook() {
+  var n = _bid('bkName'), l = _bid('bkLast'), e = _bid('bkEmail'), p = _bid('bkPhone'), btn = _bid('bookGo');
+  if (!btn) return;
+  var ok = n.value.trim() && l.value.trim() && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim()) && p.value.trim().length >= 6;
+  btn.disabled = !ok;
+}
+(function () {
+  ['bkName', 'bkLast', 'bkEmail', 'bkPhone'].forEach(function (id) { var el = _bid(id); if (el) el.addEventListener('input', validateBook); });
+  var form = _bid('bookForm');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    validateBook();
+    if (_bid('bookGo').disabled || !_bookType) return;
+    var url = GCAL[_bookType] || GCAL.group;
+    window.open(url, '_blank', 'noopener'); // abrir YA (gesto del usuario, evita bloqueo de popups)
+    var lang = (typeof LANG !== 'undefined') ? LANG : 'en';
+    var fd = new FormData();
+    fd.append('name', _bid('bkName').value.trim());
+    fd.append('surname', _bid('bkLast').value.trim());
+    fd.append('email', _bid('bkEmail').value.trim());
+    fd.append('phone', _bid('bkPhone').value.trim());
+    fd.append('class_type', _bookType === 'group' ? 'Group' : 'Private/Duo');
+    fd.append('_subject', 'New booking lead — ' + (_bookType === 'group' ? 'Group' : 'Private/Duo'));
+    fd.append('_template', 'table');
+    fetch('https://formsubmit.co/ajax/contact@bealatriz.com', { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd }).catch(function () {});
+    var msg = _bid('bookMsg');
+    if (msg) { msg.textContent = (lang === 'th' ? 'กำลังเปิดปฏิทิน… เลือกเวลาของคุณ' : 'Opening the calendar… pick your time.'); msg.className = 'cform-msg ok'; msg.hidden = false; }
+    setTimeout(closeBook, 2600);
+  });
+})();
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeTeam(); closeBook(); } });
 
 // Mostrar la inicial en las tarjetas del equipo mientras no exista la foto
