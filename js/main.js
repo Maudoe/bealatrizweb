@@ -44,3 +44,18 @@ document.getElementById('langToggle').addEventListener('click', function () {
 });
 
 setLang(LANG);
+
+// ---- Aparición suave de secciones al hacer scroll ----
+(function () {
+  var els = document.querySelectorAll('.info-cell, #estudio .center, .quote .center, #clases .center, .ccard, #galeria .center, .gitem, .cta .center, .foot-grid > div');
+  els.forEach(function (el) { el.classList.add('reveal'); });
+  // escalonado en grupos (tarjetas y galería)
+  ['.cards .ccard', '.gallery .gitem'].forEach(function (sel) {
+    document.querySelectorAll(sel).forEach(function (el, i) { el.style.transitionDelay = (i * 0.09) + 's'; });
+  });
+  if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function (el) { io.observe(el); });
+})();
