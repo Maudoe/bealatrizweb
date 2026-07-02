@@ -53,6 +53,9 @@ body.th .eyebrow,body.th .menu a,body.th .lang-btn,body.th .btn{letter-spacing:1
 .hero-slide.on{opacity:1;animation:kenburns 9s ease-out forwards;}
 @keyframes kenburns{from{transform:scale(1.001)}to{transform:scale(1.09)}}
 .hero-overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(28,24,22,.5),rgba(28,24,22,.32) 42%,rgba(28,24,22,.62));}
+.hero-dots{position:absolute;bottom:58px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:9px;}
+.hero-dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.42);cursor:pointer;transition:.3s;}
+.hero-dots i.on{background:#fff;width:22px;border-radius:5px;box-shadow:0 0 10px rgba(255,255,255,.6);}
 .hero-in{position:relative;z-index:2;padding:0 24px;max-width:820px;}
 .hero-logo{width:min(440px,82%);height:auto;margin:0 auto 24px;display:block;filter:drop-shadow(0 0 34px rgba(255,255,255,.28));animation:logoGlow 4s ease-in-out infinite;}
 @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 26px rgba(255,255,255,.22));}50%{filter:drop-shadow(0 0 40px rgba(255,255,255,.38));}}

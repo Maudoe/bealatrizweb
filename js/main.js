@@ -45,31 +45,37 @@ document.getElementById('langToggle').addEventListener('click', function () {
 
 setLang(LANG);
 
-// ---- Carrusel del hero (cross-fade + Ken Burns) ----
+// ---- Carrusel del hero (cross-fade + Ken Burns + dots) ----
 (function () {
   var srcs = ['assets/hero1.jpg', 'assets/hero2.jpg', 'assets/hero3.jpg', 'assets/hero4.jpg', 'assets/hero.jpg'];
   var host = document.getElementById('heroSlides');
+  var dotsHost = document.getElementById('heroDots');
   if (!host) return;
-  var slides = [];
+  var slides = [], dots = [], idx = 0, timer;
+  function show(i) {
+    if (!slides.length) return;
+    slides[idx].classList.remove('on'); if (dots[idx]) dots[idx].classList.remove('on');
+    idx = (i + slides.length) % slides.length;
+    slides[idx].classList.add('on'); if (dots[idx]) dots[idx].classList.add('on');
+  }
+  function start() { clearInterval(timer); if (slides.length > 1) timer = setInterval(function () { show(idx + 1); }, 5000); }
   srcs.forEach(function (src) {
     var im = new Image();
     im.onload = function () {
       var d = document.createElement('div');
       d.className = 'hero-slide';
       d.style.backgroundImage = "url('" + src + "')";
-      host.appendChild(d);
-      slides.push(d);
-      if (slides.length === 1) d.classList.add('on'); // primera foto cargada = visible
+      host.appendChild(d); slides.push(d);
+      if (dotsHost) {
+        var dot = document.createElement('i'); var mine = slides.length - 1;
+        dot.addEventListener('click', function () { show(mine); start(); });
+        dotsHost.appendChild(dot); dots.push(dot);
+      }
+      if (slides.length === 1) { d.classList.add('on'); if (dots[0]) dots[0].classList.add('on'); }
+      start();
     };
     im.src = src; // si no existe, onload no dispara y no se agrega (sin imágenes rotas)
   });
-  var idx = 0;
-  setInterval(function () {
-    if (slides.length < 2) return;            // con 1 sola foto queda estática
-    slides[idx].classList.remove('on');
-    idx = (idx + 1) % slides.length;
-    slides[idx].classList.add('on');
-  }, 5000);
 })();
 
 // ---- Aparición suave de secciones al hacer scroll ----
