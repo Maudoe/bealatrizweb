@@ -196,6 +196,7 @@ function validateBook() {
     fd.append('surname', _bid('bkLast').value.trim());
     fd.append('email', _bid('bkEmail').value.trim());
     fd.append('phone', _bid('bkPhone').value.trim());
+    fd.append('studio_preference', _bid('bkPref') ? _bid('bkPref').value.trim() : '');
     fd.append('class_type', _bookType === 'group' ? 'Group' : 'Private/Duo');
     fd.append('_subject', 'New booking lead — ' + (_bookType === 'group' ? 'Group' : 'Private/Duo'));
     fd.append('_template', 'table');
