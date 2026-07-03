@@ -217,9 +217,9 @@ section.block > .wrap{position:relative;z-index:1;}
 
 /* Team modal */
 .tmodal[hidden]{display:none;}
-.tmodal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px;}
-.tmodal-backdrop{position:absolute;inset:0;background:rgba(20,16,18,.62);backdrop-filter:blur(4px);}
-.tmodal-card{position:relative;z-index:1;background:var(--white);border-radius:20px;max-width:470px;width:100%;padding:40px 34px 34px;text-align:center;box-shadow:0 40px 100px rgba(0,0,0,.5), 0 12px 32px rgba(0,0,0,.28), 0 0 0 1px rgba(255,255,255,.05);animation:tmIn .32s cubic-bezier(.2,.7,.2,1);}
+.tmodal{position:fixed;inset:0;z-index:300;display:flex;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px;}
+.tmodal-backdrop{position:fixed;inset:0;background:rgba(20,16,18,.62);backdrop-filter:blur(4px);}
+.tmodal-card{position:relative;z-index:1;margin:auto;background:var(--white);border-radius:20px;max-width:470px;width:100%;padding:40px 34px 34px;text-align:center;box-shadow:0 40px 100px rgba(0,0,0,.5), 0 12px 32px rgba(0,0,0,.28), 0 0 0 1px rgba(255,255,255,.05);animation:tmIn .32s cubic-bezier(.2,.7,.2,1);}
 @keyframes tmIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
 .tmodal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:18px;color:var(--muted);cursor:pointer;line-height:1;}
 .tmodal-close:hover{color:var(--ink);}
