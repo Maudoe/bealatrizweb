@@ -288,9 +288,14 @@
         </div>
         <input type="email" id="bkEmail" required placeholder="Email *" data-ph-en="Email *" data-ph-th="อีเมล *">
         <input type="tel" id="bkPhone" required placeholder="Phone / WhatsApp / LINE *" data-ph-en="Phone / WhatsApp / LINE *" data-ph-th="โทรศัพท์ / WhatsApp / LINE *">
+        <p class="book-sub" style="margin:6px 0 4px" data-en="Preferred date and time *" data-th="วันและเวลาที่ต้องการ *">Preferred date and time *</p>
+        <div class="cform-row">
+          <input type="date" id="bkDate" required>
+          <input type="time" id="bkTime" required>
+        </div>
         <textarea id="bkPref" rows="2" placeholder="Studio preference (optional)" data-ph-en="Studio preference (optional)" data-ph-th="สาขาที่ต้องการ (ถ้ามี)"></textarea>
         <p class="book-sub" style="margin:2px 0 10px" data-en="Have a preferred studio? Let us know here. Your instructor will confirm which studio is available for the time you choose." data-th="มีสาขาที่ต้องการไหม? แจ้งเราตรงนี้ได้เลย ผู้สอนจะยืนยันว่าสาขาไหนว่างในเวลาที่คุณเลือก">Have a preferred studio? Let us know here. Your instructor will confirm which studio is available for the time you choose.</p>
-        <button type="submit" class="btn solid" id="bookGo" disabled data-en="Continue to pick a time →" data-th="ไปเลือกเวลา →">Continue to pick a time →</button>
+        <button type="submit" class="btn solid" id="bookGo" disabled data-en="Send booking request →" data-th="ส่งคำขอจอง →">Send booking request →</button>
         <p class="cform-msg" id="bookMsg" hidden></p>
       </form>
     </div>

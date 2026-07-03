@@ -158,7 +158,7 @@ function closeTeam() {
   document.body.style.overflow = '';
 }
 // ===== Booking: tipo -> datos -> calendario =====
-var GCAL = { group: 'https://calendar.app.google/GTQrbAJMwh4SzBZw8', private: 'https://calendar.app.google/Qv36heioVKBe2bA39' };
+var CRM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyUboSnNfLWwwx28pUqIErWkP4OdzNGved9QPAYkRUbM08sjz7QRERkO9FwQACk0yWE/exec';
 var _bookType = null;
 function _bid(id) { return document.getElementById(id); }
 function resetBook() {
@@ -181,35 +181,35 @@ function pickType(t) {
 }
 function bookBack() { _bid('bookStep2').hidden = true; _bid('bookStep1').hidden = false; }
 function validateBook() {
-  var n = _bid('bkName'), l = _bid('bkLast'), e = _bid('bkEmail'), p = _bid('bkPhone'), btn = _bid('bookGo');
+  var n = _bid('bkName'), l = _bid('bkLast'), e = _bid('bkEmail'), p = _bid('bkPhone'), d = _bid('bkDate'), ti = _bid('bkTime'), btn = _bid('bookGo');
   if (!btn) return;
-  var ok = n.value.trim() && l.value.trim() && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim()) && p.value.trim().length >= 6;
+  var ok = n.value.trim() && l.value.trim() && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim()) && p.value.trim().length >= 6 && d && d.value && ti && ti.value;
   btn.disabled = !ok;
 }
 (function () {
-  ['bkName', 'bkLast', 'bkEmail', 'bkPhone'].forEach(function (id) { var el = _bid(id); if (el) el.addEventListener('input', validateBook); });
+  ['bkName', 'bkLast', 'bkEmail', 'bkPhone', 'bkDate', 'bkTime'].forEach(function (id) { var el = _bid(id); if (el) { el.addEventListener('input', validateBook); el.addEventListener('change', validateBook); } });
   var form = _bid('bookForm');
   if (!form) return;
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     validateBook();
     if (_bid('bookGo').disabled || !_bookType) return;
-    var url = GCAL[_bookType] || GCAL.group;
-    window.open(url, '_blank', 'noopener'); // abrir YA (gesto del usuario, evita bloqueo de popups)
     var lang = (typeof LANG !== 'undefined') ? LANG : 'en';
-    var fd = new FormData();
-    fd.append('name', _bid('bkName').value.trim());
-    fd.append('surname', _bid('bkLast').value.trim());
-    fd.append('email', _bid('bkEmail').value.trim());
-    fd.append('phone', _bid('bkPhone').value.trim());
-    fd.append('studio_preference', _bid('bkPref') ? _bid('bkPref').value.trim() : '');
-    fd.append('class_type', _bookType === 'group' ? 'Group' : 'Private/Duo');
-    fd.append('_subject', 'New booking lead — ' + (_bookType === 'group' ? 'Group' : 'Private/Duo'));
-    fd.append('_template', 'table');
-    fetch('https://formsubmit.co/ajax/contact@bealatriz.com', { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd }).catch(function () {});
+    var body = new URLSearchParams({
+      name: _bid('bkName').value.trim(),
+      surname: _bid('bkLast').value.trim(),
+      email: _bid('bkEmail').value.trim(),
+      phone: _bid('bkPhone').value.trim(),
+      date: _bid('bkDate').value,
+      time: _bid('bkTime').value,
+      class_type: _bookType === 'group' ? 'Group' : 'Private/Duo',
+      studio_preference: _bid('bkPref') ? _bid('bkPref').value.trim() : ''
+    });
+    fetch(CRM_ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() }).catch(function () {});
     var msg = _bid('bookMsg');
-    if (msg) { msg.textContent = (lang === 'th' ? 'กำลังเปิดปฏิทิน… เลือกเวลาของคุณ' : 'Opening the calendar… pick your time.'); msg.className = 'cform-msg ok'; msg.hidden = false; }
-    setTimeout(closeBook, 2600);
+    if (msg) { msg.textContent = (lang === 'th' ? 'ส่งคำขอจองแล้ว! เราจะติดต่อกลับเพื่อยืนยันคลาสของคุณ' : 'Booking request sent! We’ll contact you to confirm your class.'); msg.className = 'cform-msg ok'; msg.hidden = false; }
+    var gb = _bid('bookGo'); if (gb) gb.disabled = true;
+    setTimeout(closeBook, 3400);
   });
 })();
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeTeam(); closeBook(); } });
