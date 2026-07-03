@@ -214,6 +214,30 @@ function validateBook() {
 })();
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeTeam(); closeBook(); } });
 
+// ---- FX: cambio de tono al scrollear + glow que sigue el cursor ----
+(function () {
+  var root = document.documentElement, cg = document.querySelector('.cursor-glow');
+  function onScroll() {
+    var h = root.scrollHeight - window.innerHeight;
+    var p = h > 0 ? window.scrollY / h : 0;
+    root.style.setProperty('--scrollhue', (p * 300).toFixed(1) + 'deg');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  var fine = window.matchMedia('(pointer:fine)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (cg && fine && !reduce) {
+    document.body.classList.add('has-cursor');
+    var rx = window.innerWidth / 2, ry = window.innerHeight / 2, cx = rx, cy = ry, raf = null;
+    window.addEventListener('mousemove', function (e) { rx = e.clientX; ry = e.clientY; if (!raf) raf = requestAnimationFrame(tick); });
+    function tick() {
+      cx += (rx - cx) * 0.16; cy += (ry - cy) * 0.16;
+      cg.style.transform = 'translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px) translate(-50%,-50%)';
+      raf = (Math.abs(rx - cx) > 0.4 || Math.abs(ry - cy) > 0.4) ? requestAnimationFrame(tick) : null;
+    }
+  }
+})();
+
 // Mostrar la inicial en las tarjetas del equipo mientras no exista la foto
 document.querySelectorAll('.tavatar').forEach(function (av) {
   var m = (av.style.backgroundImage || '').match(/url\(["']?([^"')]+)["']?\)/);
