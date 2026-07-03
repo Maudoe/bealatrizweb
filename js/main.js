@@ -129,9 +129,15 @@ setLang(LANG);
 
 // ---- Equipo (modales) ----
 var TEAM = {
-  bee:  { name: 'Bee',  img: 'assets/team/bee.jpg',  role_en: 'Instructor', role_th: 'ครูผู้สอน', bio_en: '[Bio de Bee — completar]',  bio_th: '[ประวัติของ Bee — เพิ่มข้อมูล]' },
-  aida: { name: 'Aida', img: 'assets/team/aida.jpg', role_en: 'Instructor', role_th: 'ครูผู้สอน', bio_en: '[Bio de Aida — completar]', bio_th: '[ประวัติของ Aida — เพิ่มข้อมูล]' },
-  ai:   { name: 'Ai',   img: 'assets/team/ai.jpg',   role_en: 'Instructor', role_th: 'ครูผู้สอน', bio_en: '[Bio de Ai — completar]',   bio_th: '[ประวัติของ Ai — เพิ่มข้อมูล]' }
+  bee:  { name: 'Bee',  img: 'assets/team/bee.jpg',  role_en: 'Instructor · Scolio-Pilates certified', role_th: 'ครูผู้สอน · ได้รับการรับรอง Scolio-Pilates',
+    bio_en: 'Bee is a certified Pilates instructor with specialised training in Scolio-Pilates — the method for scoliosis and postural conditions. She leads Bealatriz’s health workshops together with physiotherapists and doctors, including sessions on posture and office syndrome. For Bee, Pilates is not only movement, but a way to truly understand and care for your body.',
+    bio_th: 'ครู Bee เป็นครูสอนพิลาทิสที่ได้รับการรับรอง และมีการอบรมเฉพาะทางด้าน Scolio-Pilates ซึ่งเป็นวิธีสำหรับกระดูกสันหลังคดและปัญหาท่าทาง เธอเป็นผู้นำเวิร์กช็อปสุขภาพของ Bealatriz ร่วมกับนักกายภาพบำบัดและแพทย์ รวมถึงหัวข้อท่าทางและออฟฟิศซินโดรม สำหรับครู Bee พิลาทิสไม่ใช่แค่การเคลื่อนไหว แต่เป็นวิธีทำความเข้าใจและดูแลร่างกายอย่างแท้จริง' },
+  aida: { name: 'Aida', img: 'assets/team/aida.jpg', role_en: 'Instructor', role_th: 'ครูผู้สอน',
+    bio_en: 'Aida is a dedicated Pilates instructor who loves helping clients move better and feel stronger. She brings warmth, precision and patience to every class — whether it’s your very first session or your hundredth.',
+    bio_th: 'ครู Aida เป็นครูสอนพิลาทิสที่ทุ่มเท ชอบช่วยให้ลูกค้าเคลื่อนไหวได้ดีขึ้นและแข็งแรงขึ้น เธอใส่ใจ อบอุ่น และอดทนในทุกคลาส ไม่ว่าจะเป็นครั้งแรกหรือครั้งที่ร้อยของคุณ' },
+  ai:   { name: 'Ai',   img: 'assets/team/ai.jpg',   role_en: 'Instructor', role_th: 'ครูผู้สอน',
+    bio_en: 'Ai is a passionate Pilates instructor focused on control, breath and mindful movement. She creates a calm, supportive space so every client can progress safely at their own pace.',
+    bio_th: 'ครู Ai เป็นครูสอนพิลาทิสที่มีใจรัก เน้นการควบคุม การหายใจ และการเคลื่อนไหวอย่างมีสติ เธอสร้างบรรยากาศที่สงบและเป็นกำลังใจ เพื่อให้ทุกคนก้าวหน้าได้อย่างปลอดภัยตามจังหวะของตัวเอง' }
 };
 function openTeam(id) {
   var t = TEAM[id]; if (!t) return;
