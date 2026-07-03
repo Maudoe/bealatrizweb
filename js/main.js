@@ -181,7 +181,7 @@ function buildDateCal() {
     var nav = e.target.closest('[data-nav]');
     if (nav) { _calView.m += (nav.getAttribute('data-nav') === 'next' ? 1 : -1); if (_calView.m < 0) { _calView.m = 11; _calView.y--; } if (_calView.m > 11) { _calView.m = 0; _calView.y++; } renderCal(); return; }
     var day = e.target.closest('.cal-day[data-d]');
-    if (day) { var ds = day.getAttribute('data-d'); _bid('bkDate').value = ds; _bid('bkDateLabel').textContent = _fmtNice(ds); close(); validateBook(); }
+    if (day) { var ds = day.getAttribute('data-d'); _bid('bkDate').value = ds; _bid('bkDateLabel').textContent = _fmtNice(ds); filterTimeSlots(ds); close(); validateBook(); }
   });
   function renderCal() {
     var th = (typeof LANG !== 'undefined' && LANG === 'th');
@@ -204,6 +204,21 @@ function buildDateCal() {
       '<div class="cal-grid">' + cells + '</div>';
   }
 }
+function filterTimeSlots(ds) {
+  var box = _bid('bkTimes'); if (!box) return;
+  var now = new Date();
+  var todayStr = now.getFullYear() + '-' + _p2(now.getMonth() + 1) + '-' + _p2(now.getDate());
+  var curMin = now.getHours() * 60 + now.getMinutes();
+  Array.prototype.forEach.call(box.querySelectorAll('.time-chip'), function (b) {
+    var pm = b.getAttribute('data-t').split(':');
+    var tm = Number(pm[0]) * 60 + Number(pm[1]);
+    var off = (ds === todayStr) && (tm <= curMin + 30);   // margen de 30 min
+    b.disabled = off;
+    b.classList.toggle('slot-off', off);
+    if (off && b.classList.contains('on')) { b.classList.remove('on'); var h = _bid('bkTime'); if (h) h.value = ''; }
+  });
+  validateBook();
+}
 function buildTimeChips() {
   var box = _bid('bkTimes'); if (!box || box.dataset.built) return;
   box.dataset.built = '1';
@@ -223,7 +238,7 @@ function resetBook() {
   if (s1) s1.hidden = false; if (s2) s2.hidden = true;
   if (f) f.reset(); if (msg) { msg.hidden = true; msg.className = 'cform-msg'; }
   if (btn) btn.disabled = true;
-  var tp = _bid('bkTimes'); if (tp) Array.prototype.forEach.call(tp.querySelectorAll('.time-chip'), function (x) { x.classList.remove('on'); });
+  var tp = _bid('bkTimes'); if (tp) Array.prototype.forEach.call(tp.querySelectorAll('.time-chip'), function (x) { x.classList.remove('on'); x.classList.remove('slot-off'); x.disabled = false; });
   var bt = _bid('bkTime'); if (bt) bt.value = '';
   var bd = _bid('bkDate'); if (bd) bd.value = '';
   var bl = _bid('bkDateLabel'); if (bl) bl.textContent = _dateDefault();
