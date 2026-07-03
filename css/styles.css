@@ -319,6 +319,10 @@ footer{background:#171b20;color:#ece9e4;padding:60px 0 34px;}
 #bookModal .cform input::placeholder{color:#9b8f7f;}
 #bookModal .cform input:focus{border-color:#e0be7e;box-shadow:0 0 0 3px rgba(224,190,126,.18);background:rgba(255,255,255,.06);}
 #bookModal .cform input:user-invalid{border-color:#c76b6b;box-shadow:0 0 0 3px rgba(199,107,107,.14);}
+/* Selectores de fecha/hora en estilo luxury (popup oscuro + icono dorado) */
+#bookModal .cform input[type="date"],#bookModal .cform input[type="time"]{color-scheme:dark;font-family:inherit;letter-spacing:.3px;}
+#bookModal .cform input[type="date"]::-webkit-calendar-picker-indicator,#bookModal .cform input[type="time"]::-webkit-calendar-picker-indicator{filter:invert(78%) sepia(28%) saturate(560%) hue-rotate(2deg) brightness(95%);opacity:.9;cursor:pointer;padding-left:6px;}
+#bookModal .cform input[type="date"]:hover::-webkit-calendar-picker-indicator,#bookModal .cform input[type="time"]:hover::-webkit-calendar-picker-indicator{opacity:1;}
 #bookModal .req{color:#e8ca8c;}
 /* Botón dorado */
 #bookModal .cform .btn.solid{align-self:stretch;width:100%;text-align:center;margin-top:12px;border:none;color:#241c12;background:linear-gradient(135deg,#efd7a0 0%,#d3ad6a 100%);box-shadow:0 12px 30px rgba(211,173,106,.3);transition:filter .3s,box-shadow .3s,transform .2s;}
