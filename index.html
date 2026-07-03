@@ -289,7 +289,9 @@
         <input type="email" id="bkEmail" required placeholder="Email *" data-ph-en="Email *" data-ph-th="อีเมล *">
         <input type="tel" id="bkPhone" required placeholder="Phone / WhatsApp / LINE *" data-ph-en="Phone / WhatsApp / LINE *" data-ph-th="โทรศัพท์ / WhatsApp / LINE *">
         <p class="book-sub" style="margin:6px 0 4px" data-en="Preferred date *" data-th="วันที่ต้องการ *">Preferred date *</p>
-        <input type="date" id="bkDate" required>
+        <div class="date-field" id="bkDateField" tabindex="0"><span id="bkDateLabel">Choose a date</span><span class="date-ico">▾</span></div>
+        <div class="date-cal" id="bkCal" hidden></div>
+        <input type="hidden" id="bkDate">
         <p class="book-sub" style="margin:12px 0 4px" data-en="Preferred time *" data-th="เวลาที่ต้องการ *">Preferred time *</p>
         <div class="time-picker" id="bkTimes"></div>
         <input type="hidden" id="bkTime">

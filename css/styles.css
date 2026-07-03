@@ -328,6 +328,24 @@ footer{background:#171b20;color:#ece9e4;padding:60px 0 34px;}
 #bookModal .time-chip{font-family:inherit;font-size:14px;color:#e8dfce;background:rgba(255,255,255,.05);border:1px solid rgba(224,190,126,.28);border-radius:10px;padding:9px 15px;cursor:pointer;transition:border-color .2s,background .2s,transform .12s;}
 #bookModal .time-chip:hover{border-color:rgba(232,202,140,.7);background:rgba(255,255,255,.09);}
 #bookModal .time-chip.on{background:linear-gradient(135deg,#efd7a0,#d3ad6a);color:#241c12;border-color:#efd7a0;font-weight:700;box-shadow:0 6px 16px rgba(211,173,106,.32);}
+/* Calendario custom (fecha) en estilo luxury */
+#bookModal .date-field{display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.14);color:#f2ebe0;border-radius:12px;padding:14px 16px;font-size:15px;transition:border-color .2s;}
+#bookModal .date-field:hover{border-color:rgba(224,190,126,.55);}
+#bookModal .date-ico{color:#e0be7e;font-size:12px;}
+#bookModal .date-cal[hidden]{display:none;}
+#bookModal .date-cal{margin-top:8px;background:linear-gradient(165deg,#241f20,#171213);border:1px solid rgba(224,190,126,.28);border-radius:14px;padding:12px;box-shadow:0 22px 50px rgba(0,0,0,.5);}
+#bookModal .cal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+#bookModal .cal-my{font-family:var(--serif);font-size:18px;color:#f6f0e6;}
+#bookModal .cal-nav{background:none;border:none;color:#e0be7e;font-size:24px;line-height:1;cursor:pointer;padding:0 8px;}
+#bookModal .cal-dows{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px;}
+#bookModal .cal-dows span{text-align:center;font-size:11px;color:#a99d8c;}
+#bookModal .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+#bookModal .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:none;background:none;color:#e8dfce;font:inherit;font-size:14px;border-radius:9px;cursor:pointer;transition:background .15s;}
+#bookModal .cal-day.empty{visibility:hidden;}
+#bookModal button.cal-day:hover{background:rgba(224,190,126,.18);}
+#bookModal .cal-day.today{box-shadow:inset 0 0 0 1px rgba(224,190,126,.5);}
+#bookModal .cal-day.sel{background:linear-gradient(135deg,#efd7a0,#d3ad6a);color:#241c12;font-weight:700;}
+#bookModal .cal-day.past{color:#5c554b;cursor:default;}
 #bookModal .req{color:#e8ca8c;}
 /* Botón dorado */
 #bookModal .cform .btn.solid{align-self:stretch;width:100%;text-align:center;margin-top:12px;border:none;color:#241c12;background:linear-gradient(135deg,#efd7a0 0%,#d3ad6a 100%);box-shadow:0 12px 30px rgba(211,173,106,.3);transition:filter .3s,box-shadow .3s,transform .2s;}

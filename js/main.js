@@ -160,7 +160,50 @@ function closeTeam() {
 // ===== Booking: tipo -> datos -> calendario =====
 var CRM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyUboSnNfLWwwx28pUqIErWkP4OdzNGved9QPAYkRUbM08sjz7QRERkO9FwQACk0yWE/exec';
 // Horarios disponibles del estudio (9 a 19, sin 13-14). Editable.
-var SLOTS = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+var SLOTS = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+var CAL_EN = { months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], dows: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'] };
+var CAL_TH = { months: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'], dows: ['จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อา'] };
+function _p2(n) { return ('0' + n).slice(-2); }
+function _dateDefault() { return ((typeof LANG !== 'undefined' && LANG === 'th') ? 'เลือกวันที่' : 'Choose a date'); }
+function _fmtNice(ds) { var p = ds.split('-'); var mn = (typeof LANG !== 'undefined' && LANG === 'th') ? CAL_TH.months : CAL_EN.months; return Number(p[2]) + ' ' + mn[Number(p[1]) - 1] + ' ' + p[0]; }
+var _calView = null;
+function buildDateCal() {
+  var field = _bid('bkDateField'), cal = _bid('bkCal');
+  if (!field || !cal || field.dataset.built) return;
+  field.dataset.built = '1';
+  var t = new Date(); _calView = { y: t.getFullYear(), m: t.getMonth() };
+  function open() { renderCal(); cal.hidden = false; }
+  function close() { cal.hidden = true; }
+  field.addEventListener('click', function () { cal.hidden ? open() : close(); });
+  field.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cal.hidden ? open() : close(); } });
+  document.addEventListener('click', function (e) { if (!cal.hidden && !cal.contains(e.target) && !field.contains(e.target)) close(); });
+  cal.addEventListener('click', function (e) {
+    var nav = e.target.closest('[data-nav]');
+    if (nav) { _calView.m += (nav.getAttribute('data-nav') === 'next' ? 1 : -1); if (_calView.m < 0) { _calView.m = 11; _calView.y--; } if (_calView.m > 11) { _calView.m = 0; _calView.y++; } renderCal(); return; }
+    var day = e.target.closest('.cal-day[data-d]');
+    if (day) { var ds = day.getAttribute('data-d'); _bid('bkDate').value = ds; _bid('bkDateLabel').textContent = _fmtNice(ds); close(); validateBook(); }
+  });
+  function renderCal() {
+    var th = (typeof LANG !== 'undefined' && LANG === 'th');
+    var MN = th ? CAL_TH.months : CAL_EN.months, DN = th ? CAL_TH.dows : CAL_EN.dows;
+    var y = _calView.y, m = _calView.m;
+    var startDow = (new Date(y, m, 1).getDay() + 6) % 7;
+    var days = new Date(y, m + 1, 0).getDate();
+    var now = new Date(); var todayStr = now.getFullYear() + '-' + _p2(now.getMonth() + 1) + '-' + _p2(now.getDate());
+    var sel = _bid('bkDate').value;
+    var cells = '';
+    for (var i = 0; i < startDow; i++) cells += '<span class="cal-day empty"></span>';
+    for (var d = 1; d <= days; d++) {
+      var ds = y + '-' + _p2(m + 1) + '-' + _p2(d);
+      var past = ds < todayStr;
+      var cls = 'cal-day' + (past ? ' past' : '') + (ds === sel ? ' sel' : '') + (ds === todayStr ? ' today' : '');
+      cells += past ? '<span class="' + cls + '">' + d + '</span>' : '<button type="button" class="' + cls + '" data-d="' + ds + '">' + d + '</button>';
+    }
+    cal.innerHTML = '<div class="cal-hd"><button type="button" class="cal-nav" data-nav="prev">‹</button><span class="cal-my">' + MN[m] + ' ' + y + '</span><button type="button" class="cal-nav" data-nav="next">›</button></div>' +
+      '<div class="cal-dows">' + DN.map(function (x) { return '<span>' + x + '</span>'; }).join('') + '</div>' +
+      '<div class="cal-grid">' + cells + '</div>';
+  }
+}
 function buildTimeChips() {
   var box = _bid('bkTimes'); if (!box || box.dataset.built) return;
   box.dataset.built = '1';
@@ -182,6 +225,9 @@ function resetBook() {
   if (btn) btn.disabled = true;
   var tp = _bid('bkTimes'); if (tp) Array.prototype.forEach.call(tp.querySelectorAll('.time-chip'), function (x) { x.classList.remove('on'); });
   var bt = _bid('bkTime'); if (bt) bt.value = '';
+  var bd = _bid('bkDate'); if (bd) bd.value = '';
+  var bl = _bid('bkDateLabel'); if (bl) bl.textContent = _dateDefault();
+  var bc = _bid('bkCal'); if (bc) bc.hidden = true;
   _bookType = null;
 }
 function openBook() { resetBook(); var m = _bid('bookModal'); if (m) { m.hidden = false; document.body.style.overflow = 'hidden'; } }
@@ -207,6 +253,7 @@ function validateBook() {
   var form = _bid('bookForm');
   if (!form) return;
   buildTimeChips();
+  buildDateCal();
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     validateBook();
