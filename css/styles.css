@@ -323,6 +323,11 @@ footer{background:#171b20;color:#ece9e4;padding:60px 0 34px;}
 #bookModal .cform input[type="date"],#bookModal .cform input[type="time"]{color-scheme:dark;font-family:inherit;letter-spacing:.3px;}
 #bookModal .cform input[type="date"]::-webkit-calendar-picker-indicator,#bookModal .cform input[type="time"]::-webkit-calendar-picker-indicator{filter:invert(78%) sepia(28%) saturate(560%) hue-rotate(2deg) brightness(95%);opacity:.9;cursor:pointer;padding-left:6px;}
 #bookModal .cform input[type="date"]:hover::-webkit-calendar-picker-indicator,#bookModal .cform input[type="time"]:hover::-webkit-calendar-picker-indicator{opacity:1;}
+/* Picker de horario custom (chips dorados) */
+#bookModal .time-picker{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 4px;}
+#bookModal .time-chip{font-family:inherit;font-size:14px;color:#e8dfce;background:rgba(255,255,255,.05);border:1px solid rgba(224,190,126,.28);border-radius:10px;padding:9px 15px;cursor:pointer;transition:border-color .2s,background .2s,transform .12s;}
+#bookModal .time-chip:hover{border-color:rgba(232,202,140,.7);background:rgba(255,255,255,.09);}
+#bookModal .time-chip.on{background:linear-gradient(135deg,#efd7a0,#d3ad6a);color:#241c12;border-color:#efd7a0;font-weight:700;box-shadow:0 6px 16px rgba(211,173,106,.32);}
 #bookModal .req{color:#e8ca8c;}
 /* Botón dorado */
 #bookModal .cform .btn.solid{align-self:stretch;width:100%;text-align:center;margin-top:12px;border:none;color:#241c12;background:linear-gradient(135deg,#efd7a0 0%,#d3ad6a 100%);box-shadow:0 12px 30px rgba(211,173,106,.3);transition:filter .3s,box-shadow .3s,transform .2s;}

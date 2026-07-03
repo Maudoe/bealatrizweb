@@ -159,6 +159,20 @@ function closeTeam() {
 }
 // ===== Booking: tipo -> datos -> calendario =====
 var CRM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyUboSnNfLWwwx28pUqIErWkP4OdzNGved9QPAYkRUbM08sjz7QRERkO9FwQACk0yWE/exec';
+// Horarios disponibles del estudio (9 a 19, sin 13-14). Editable.
+var SLOTS = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+function buildTimeChips() {
+  var box = _bid('bkTimes'); if (!box || box.dataset.built) return;
+  box.dataset.built = '1';
+  box.innerHTML = SLOTS.map(function (s) { return '<button type="button" class="time-chip" data-t="' + s + '">' + s + '</button>'; }).join('');
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest('.time-chip'); if (!b) return;
+    Array.prototype.forEach.call(box.querySelectorAll('.time-chip'), function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    var hid = _bid('bkTime'); if (hid) hid.value = b.getAttribute('data-t');
+    validateBook();
+  });
+}
 var _bookType = null;
 function _bid(id) { return document.getElementById(id); }
 function resetBook() {
@@ -166,6 +180,8 @@ function resetBook() {
   if (s1) s1.hidden = false; if (s2) s2.hidden = true;
   if (f) f.reset(); if (msg) { msg.hidden = true; msg.className = 'cform-msg'; }
   if (btn) btn.disabled = true;
+  var tp = _bid('bkTimes'); if (tp) Array.prototype.forEach.call(tp.querySelectorAll('.time-chip'), function (x) { x.classList.remove('on'); });
+  var bt = _bid('bkTime'); if (bt) bt.value = '';
   _bookType = null;
 }
 function openBook() { resetBook(); var m = _bid('bookModal'); if (m) { m.hidden = false; document.body.style.overflow = 'hidden'; } }
@@ -190,6 +206,7 @@ function validateBook() {
   ['bkName', 'bkLast', 'bkEmail', 'bkPhone', 'bkDate', 'bkTime'].forEach(function (id) { var el = _bid(id); if (el) { el.addEventListener('input', validateBook); el.addEventListener('change', validateBook); } });
   var form = _bid('bookForm');
   if (!form) return;
+  buildTimeChips();
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     validateBook();
