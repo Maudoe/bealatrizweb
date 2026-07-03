@@ -295,8 +295,14 @@
         <p class="book-sub" style="margin:12px 0 4px" data-en="Preferred time *" data-th="เวลาที่ต้องการ *">Preferred time *</p>
         <div class="time-picker" id="bkTimes"></div>
         <input type="hidden" id="bkTime">
-        <textarea id="bkPref" rows="2" placeholder="Studio preference (optional)" data-ph-en="Studio preference (optional)" data-ph-th="สาขาที่ต้องการ (ถ้ามี)"></textarea>
-        <p class="book-sub" style="margin:2px 0 10px" data-en="Have a preferred studio? Let us know here. Your instructor will confirm which studio is available for the time you choose." data-th="มีสาขาที่ต้องการไหม? แจ้งเราตรงนี้ได้เลย ผู้สอนจะยืนยันว่าสาขาไหนว่างในเวลาที่คุณเลือก">Have a preferred studio? Let us know here. Your instructor will confirm which studio is available for the time you choose.</p>
+        <p class="book-sub" style="margin:12px 0 6px" data-en="Preferred studio" data-th="สาขาที่ต้องการ">Preferred studio</p>
+        <div class="studio-pick" id="bkStudios">
+          <button type="button" class="studio-chip" data-val="Mittraphap"><b>Mittraphap</b><small>Nai Mueang · Mittraphap Rd</small></button>
+          <button type="button" class="studio-chip" data-val="The Heritage"><b>The Heritage</b><small>Sila · The Heritage</small></button>
+          <button type="button" class="studio-chip on" data-val=""><b data-en="No preference" data-th="ไม่ระบุ">No preference</b><small data-en="Either studio" data-th="สาขาใดก็ได้">Either studio</small></button>
+        </div>
+        <input type="hidden" id="bkPref" value="">
+        <p class="book-sub" style="margin:6px 0 10px" data-en="Your instructor will confirm which studio is available for the time you choose." data-th="ผู้สอนจะยืนยันว่าสาขาไหนว่างในเวลาที่คุณเลือก">Your instructor will confirm which studio is available for the time you choose.</p>
         <button type="submit" class="btn solid" id="bookGo" disabled data-en="Send booking request →" data-th="ส่งคำขอจอง →">Send booking request →</button>
         <p class="cform-msg" id="bookMsg" hidden></p>
       </form>

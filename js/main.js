@@ -269,6 +269,16 @@ function validateBook() {
   if (!form) return;
   buildTimeChips();
   buildDateCal();
+  // Selector de estudio preferido (Mittraphap / The Heritage / sin preferencia)
+  (function () {
+    var host = _bid('bkStudios'); if (!host) return;
+    host.addEventListener('click', function (e) {
+      var chip = e.target.closest('.studio-chip'); if (!chip) return;
+      Array.prototype.forEach.call(host.querySelectorAll('.studio-chip'), function (c) { c.classList.remove('on'); });
+      chip.classList.add('on');
+      if (_bid('bkPref')) _bid('bkPref').value = chip.getAttribute('data-val') || '';
+    });
+  })();
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     validateBook();
