@@ -214,6 +214,28 @@ function validateBook() {
 })();
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeTeam(); closeBook(); } });
 
+// ---- Testimonios: carousel con auto-avance ----
+(function () {
+  var track = document.getElementById('tstTrack'), dots = document.getElementById('tstDots');
+  if (!track) return;
+  var n = track.children.length, i = 0, timer = null;
+  for (var k = 0; k < n; k++) {
+    var d = document.createElement('i');
+    d.addEventListener('click', (function (idx) { return function () { go(idx); }; })(k));
+    dots.appendChild(d);
+  }
+  function render() {
+    track.style.transform = 'translateX(-' + (i * 100) + '%)';
+    Array.prototype.forEach.call(dots.children, function (el, idx) { el.classList.toggle('on', idx === i); });
+  }
+  function go(idx) { i = (idx + n) % n; render(); restart(); }
+  function restart() { clearInterval(timer); timer = setInterval(function () { go(i + 1); }, 6500); }
+  window.tstShift = function (dir) { go(i + dir); };
+  var box = track.closest('.tst');
+  if (box) { box.addEventListener('mouseenter', function () { clearInterval(timer); }); box.addEventListener('mouseleave', restart); }
+  render(); restart();
+})();
+
 // ---- FX: cambio de tono al scrollear + glow que sigue el cursor ----
 (function () {
   var root = document.documentElement, cg = document.querySelector('.cursor-glow');
