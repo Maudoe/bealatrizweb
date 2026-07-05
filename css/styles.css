@@ -371,20 +371,28 @@ footer{background:#171b20;color:#ece9e4;padding:60px 0 34px;}
   section.block{padding:70px 0;}
 }
 
-/* ===== Pricing ===== */
-.offer{max-width:840px;margin:0 auto 54px;text-align:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:22px;padding:32px 28px;box-shadow:0 22px 50px rgba(44,42,40,.18);position:relative;z-index:1;}
-.offer-tag{display:inline-block;font-family:var(--sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;background:rgba(255,255,255,.22);padding:8px 18px;border-radius:20px;margin-bottom:18px;}
+/* ===== Pricing — sección luxury negro + dorado (tarjetas blancas) ===== */
+#precios{background:radial-gradient(130% 70% at 50% -8%, rgba(224,190,126,.10), transparent 56%),linear-gradient(165deg,#201b1c 0%,#171213 56%,#100c0c 100%);}
+#precios .center .eyebrow{color:#e0be7e;}
+#precios .center h2{color:#f7f1e7;}
+#precios .center p.lead{color:#c7bcac;}
+#precios .pnote{color:#9c9082;}
+.offer{max-width:840px;margin:0 auto 54px;text-align:center;color:#f2ebe0;border:1px solid rgba(224,190,126,.3);border-radius:22px;padding:34px 28px;position:relative;z-index:1;overflow:hidden;
+  background:radial-gradient(130% 90% at 50% -14%, rgba(224,190,126,.14), transparent 60%),linear-gradient(160deg,#241e1f 0%,#150f10 100%);box-shadow:0 30px 70px rgba(0,0,0,.5);}
+.offer::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:2px;background:linear-gradient(90deg,transparent,#e8ca8c 50%,transparent);}
+.offer-tag{display:inline-block;font-family:var(--sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;background:rgba(224,190,126,.16);color:#e8ca8c;padding:8px 18px;border-radius:20px;margin-bottom:18px;}
 .offer-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:16px;}
-.offer-row>div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:14px 24px;min-width:118px;}
-.offer-row span{display:block;font-family:var(--sans);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.92;margin-bottom:5px;}
-.offer-row b{font-family:var(--serif);font-size:30px;font-weight:600;}
-.offer>p{font-size:14px;opacity:.95;max-width:520px;margin:0 auto;font-weight:300;}
+.offer-row>div{background:rgba(224,190,126,.06);border:1px solid rgba(224,190,126,.24);border-radius:14px;padding:14px 24px;min-width:118px;}
+.offer-row span{display:block;font-family:var(--sans);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#c7bcac;margin-bottom:5px;}
+.offer-row b{font-family:var(--serif);font-size:30px;font-weight:600;color:#e8ca8c;}
+.offer>p{font-size:14px;color:#b4a894;max-width:520px;margin:0 auto;font-weight:300;}
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start;position:relative;z-index:1;}
 .pcard{position:relative;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:36px 28px;display:flex;flex-direction:column;box-shadow:0 14px 40px rgba(44,42,40,.07);transition:transform .4s,box-shadow .4s;}
 .pcard:hover{transform:translateY(-6px);box-shadow:0 26px 56px rgba(44,42,40,.14);}
-.pcard.featured{border:1px solid var(--accent);box-shadow:0 24px 56px rgba(201,138,151,.24);}
-.pcard-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-family:var(--sans);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:20px;white-space:nowrap;box-shadow:0 6px 16px rgba(201,138,151,.4);}
+.pcard.featured{border:1px solid rgba(224,190,126,.6);box-shadow:0 26px 60px rgba(0,0,0,.45),0 0 0 1px rgba(224,190,126,.3);}
+.pcard-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#efd7a0,#c9a24b);color:#2a2116;font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:20px;white-space:nowrap;box-shadow:0 8px 20px rgba(201,162,75,.45);}
 .pcard-head{text-align:center;margin-bottom:20px;}
+.pcard-head .eyebrow{color:#b0904a;}
 .pcard-head h3{font-family:var(--serif);font-size:27px;color:var(--ink);margin:8px 0 0;font-weight:600;}
 .ptiers{list-style:none;margin:0 0 24px;padding:0;flex:1;}
 .ptiers li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);}
