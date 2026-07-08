@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bealatriz Pilates Studio — Coming soon</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Bealatriz Pilates Studio — coming soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&family=Noto+Serif+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:32px 22px;overflow:hidden;position:relative;
+    font-family:'Jost',system-ui,sans-serif;font-weight:300;color:#fffdfa;
+    background:linear-gradient(135deg,#b9a99c,#7ba7a8);
+  }
+  /* Overlay oscuro (mismo del hero del sitio) + viñeta */
+  body::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(28,24,22,.52),rgba(28,24,22,.34) 42%,rgba(28,24,22,.66));}
+  body::after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(120% 100% at 50% 38%,transparent 55%,rgba(0,0,0,.36) 100%);}
+  .wrap{position:relative;z-index:1;max-width:640px;display:flex;flex-direction:column;align-items:center;}
+  .logo{
+    width:min(460px,86vw);height:auto;display:block;margin:0 auto 26px;
+    filter:drop-shadow(0 0 26px rgba(255,255,255,.28)) drop-shadow(0 12px 26px rgba(0,0,0,.5));
+    animation:glow 4.5s ease-in-out infinite;
+  }
+  @keyframes glow{
+    0%,100%{filter:drop-shadow(0 0 20px rgba(255,255,255,.22)) drop-shadow(0 12px 26px rgba(0,0,0,.5));}
+    50%{filter:drop-shadow(0 0 34px rgba(255,255,255,.42)) drop-shadow(0 12px 26px rgba(0,0,0,.5));}
+  }
+  .eyebrow{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.82);margin-bottom:16px;}
+  h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.08;
+     font-size:clamp(40px,8vw,74px);margin-bottom:18px;}
+  .sub{font-size:clamp(15px,2.2vw,18px);font-weight:300;opacity:.92;max-width:440px;margin:0 auto;line-height:1.6;}
+  .th{font-family:'Noto Serif Thai','Cormorant Garamond',serif;opacity:.8;margin-top:10px;font-size:15px;}
+  .rule{width:56px;height:1px;background:rgba(255,255,255,.5);margin:28px auto 0;}
+  .foot{position:absolute;bottom:26px;left:0;right:0;z-index:1;
+        font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="logo" src="assets/logo.png" alt="Bealatriz Pilates Studio">
+    <p class="eyebrow">Khon Kaen · Pilates Studio</p>
+    <h1>Coming soon</h1>
+    <p class="sub">We're crafting something beautiful for your body and mind. Our new home online will open very soon.</p>
+    <p class="sub th">เรากำลังตกแต่งพื้นที่ใหม่ของเรา — เว็บไซต์จะเปิดให้บริการเร็ว ๆ นี้</p>
+    <div class="rule"></div>
+  </div>
+  <div class="foot">© Bealatriz Healthy Space · Khon Kaen</div>
+</body>
+</html>
